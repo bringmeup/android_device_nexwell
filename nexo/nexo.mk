@@ -55,11 +55,11 @@ PRODUCT_PACKAGES += uim-sysfs \
 
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
-	device/nexwell/nexo/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
-	device/nexwell/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
-	device/nexwell/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
-	device/nexwell/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
-	device/nexwell/wl12xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts
+	device/boundary/nitrogen6x/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
+	device/boundary/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
+	device/boundary/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
+	device/boundary/wl12xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
+	device/boundary/wl12xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts
 endif
 
 ifeq ($(BOARD_WLAN_VENDOR),BCM)
@@ -68,12 +68,12 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
-	device/nexwell/nexo/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
-	device/nexwell/brcm/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
-	device/nexwell/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
-	device/nexwell/brcm/brcmfmac43340-sdio.txt:system/etc/firmware/brcm/brcmfmac43340-sdio.txt
+	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
+	device/boundary/brcm/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
+	device/boundary/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
+	device/boundary/brcm/brcmfmac43340-sdio.txt:system/etc/firmware/brcm/brcmfmac43340-sdio.txt
 
-BOARD_CUSTOM_BT_CONFIG := device/nexwell/nexo/libbt_vnd_nexo.conf
+BOARD_CUSTOM_BT_CONFIG := device/boundary/nitrogen6x/libbt_vnd_nitrogen6x.conf
 BOARD_WLAN_DEVICE_REV  := bcm4330_b2
 WIFI_BAND              := 802_11_ABG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
@@ -100,7 +100,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.rfkill.state=/sys/class/rfkill/rfkill1/state
 
-BOARD_CUSTOM_BT_CONFIG := device/nexwell/nexo/libbt_vnd_nexo.conf
+BOARD_CUSTOM_BT_CONFIG := device/nexwell/nexo/libbt_vnd_nitrogen6x.conf
 endif
 
 # ExFat support
