@@ -10,25 +10,25 @@ PRODUCT_MANUFACTURER := nexwell
 
 USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
-	device/nexwell/common/init.rc:root/init.freescale.rc \
-	device/nexwell/common/init.recovery.rc:root/init.recovery.freescale.rc \
+	device/boundary/common/init.rc:root/init.freescale.rc \
+	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
 	device/nexwell/nexo/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc \
 	device/nexwell/nexo/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc \
 	device/nexwell/nexo/init.i.MX6QP.rc:root/init.freescale.i.MX6QP.rc \
 	device/nexwell/nexo/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/nexwell/nexo/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/nexwell/nexo/fstab.freescale:root/fstab.freescale \
-	device/nexwell/scripts/setwlanmac:system/bin/setwlanmac \
+	device/boundary/scripts/setwlanmac:system/bin/setwlanmac \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ILI210x_Touchscreen.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/ft5x06.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/fusion_F0710A.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/silead_ts.idc \
-	device/nexwell/common/gsl1680.fw:system/etc/firmware/silead/gsl1680.fw \
-	device/nexwell/common/audio_policy.conf:system/etc/audio_policy.conf \
-	device/nexwell/common/audio_effects.conf:vendor/etc/audio_effects.conf \
-	device/nexwell/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+	device/boundary/common/gsl1680.fw:system/etc/firmware/silead/gsl1680.fw \
+	device/boundary/common/audio_policy.conf:system/etc/audio_policy.conf \
+	device/boundary/common/audio_effects.conf:vendor/etc/audio_effects.conf \
+	device/boundary/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/etc/a2dp_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
@@ -42,7 +42,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := \
 	device/nexwell/nexo/overlay \
-	device/nexwell/common/overlay
+	device/boundary/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
@@ -54,7 +54,7 @@ PRODUCT_PACKAGES += uim-sysfs \
 	TQS_D_1.7.ini
 
 PRODUCT_COPY_FILES += \
-	device/nexwell/common/init.ti.rc:root/init.bt-wlan.rc \
+	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
 	device/nexwell/nexo/wl1271-nvs.bin:system/etc/firmware/ti-connectivity/wl1271-nvs.bin \
 	device/nexwell/wl12xx/wl127x-fw-5-sr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-sr.bin \
 	device/nexwell/wl12xx/wl127x-fw-5-mr.bin:system/etc/firmware/ti-connectivity/wl127x-fw-5-mr.bin \
@@ -67,7 +67,7 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default
 
 PRODUCT_COPY_FILES += \
-	device/nexwell/common/init.bcm.rc:root/init.bt-wlan.rc \
+	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/nexwell/nexo/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	device/nexwell/brcm/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
 	device/nexwell/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
@@ -93,7 +93,7 @@ PRODUCT_PACKAGES += \
 	wlan/qcom_cfg.ini
 
 PRODUCT_COPY_FILES += \
-	device/nexwell/common/init.qca.rc:root/init.bt-wlan.rc
+	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc
 
 # Specify which rfkill node to use since the first available (rfkill0) is the
 # one from the HCI driver in the kernel (net/bluetooth/hci_core.c).
