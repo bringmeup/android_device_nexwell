@@ -37,6 +37,8 @@ if itest.s "x" == "x${board}" ; then
 	exit;
 fi
 
+dtbname=imx6q-nexo.dtb;
+
 if itest.s "x" == "x${dtbname}" ; then
 	if itest.s x6SOLO == "x${cpu}" ; then
 		dtbname=imx6dl-${board}.dtb;
