@@ -146,5 +146,12 @@ else
    echo "-----------missing ${diskname}${prefix}5";
 fi
 
+ubootimage=bootable/bootloader/uboot-imx/u-boot.imx
+if [ -e ${ubootimage} ]; then
+   sudo dd if=${ubootimage} of=${diskname} bs=512 seek=2 conv=fsync
+else
+   echo "-----------missing ${ubootimage} - you should build it, and then try again (or load uboot manually)"
+fi
+
 sync && sudo umount ${diskname}${prefix}*
 
