@@ -11,7 +11,7 @@
 
 # Comment out the line above and uncomment this to make the top slot on Nexo
 # or bottom (full-size SD) slot on SABRE Lite the "removable" SD card
-/devices/soc0/soc/2100000.aips-bus/2198000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
+# /devices/soc0/soc/2100000.aips-bus/2198000.usdhc/mmc_host* auto auto defaults voldmanaged=sdcard:auto,encryptable=userdata
 
 $BD1    /boot     ext4    noatime,nodiratime,errors=remount-ro                                             wait
 $BD2    /recovery ext4    noatime,nodiratime,errors=remount-ro                                             wait

@@ -78,6 +78,10 @@ fi
 echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
 umount ${diskname}${prefix}*
 
+# overwrite first 20MB with a test pattern
+#sudo badblocks -t 0x44 -b 1024 -c 1 -w ${diskname} 20480
+
+# destroy the partition table
 dd if=/dev/zero of=${diskname} count=1 bs=1024
 
 sudo parted -a minimal \
@@ -148,7 +152,8 @@ fi
 
 ubootimage=bootable/bootloader/uboot-imx/u-boot.imx
 if [ -e ${ubootimage} ]; then
-   sudo dd if=${ubootimage} of=${diskname} bs=512 seek=2 conv=fsync
+   echo "FIXME copying u-boot to i 0x400 is not possible, because partitions description is there..."
+   #sudo dd if=${ubootimage} of=${diskname} bs=512 seek=2 conv=fsync
 else
    echo "-----------missing ${ubootimage} - you should build it, and then try again (or load uboot manually)"
 fi
