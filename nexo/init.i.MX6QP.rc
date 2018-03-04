@@ -1,4 +1,6 @@
 on boot
+    # move ADB to TCP
+    setprop service.adb.tcp.port 5555
 
     # fsl omx graphic manager media framework property
     setprop media.omxgm.enable-record 1
