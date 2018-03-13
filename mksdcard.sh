@@ -82,7 +82,7 @@ umount ${diskname}${prefix}*
 #sudo badblocks -t 0x44 -b 1024 -c 1 -w ${diskname} 20480
 
 # destroy the partition table
-dd if=/dev/zero of=${diskname} count=1 bs=1024
+# dd if=/dev/zero of=${diskname} count=1 bs=1024
 
 sudo parted -a minimal \
 -s ${diskname} \
@@ -113,14 +113,19 @@ echo "all partitions present and accounted for!";
 
 echo "------------------making boot partition"
 mkfs.ext4 -F -L boot ${diskname}${prefix}1
+sync && sleep 1
 echo "------------------making recovery partition"
 mkfs.ext4 -F -L recovery ${diskname}${prefix}2
+sync && sleep 1
 echo "------------------making data partition"
 mkfs.ext4 -F -L data ${diskname}${prefix}4
+sync && sleep 1
 echo "------------------making cache partition"
 mkfs.ext4 -F -L cache ${diskname}${prefix}6
+sync && sleep 1
 echo "------------------making vendor partition"
 mkfs.ext4 -F -L vendor ${diskname}${prefix}7
+sync && sleep 1
 
 echo "------------------mounting boot, recovery, data partitions"
 sync && sudo partprobe && sleep 5
@@ -145,6 +150,7 @@ if [ -e ${diskname}${prefix}5 ]; then
    else
       sudo dd if=$system_img of=${diskname}${prefix}5 bs=1M
    fi
+   sync && sleep 1
    sudo e2fsck -f ${diskname}${prefix}5
 else
    echo "-----------missing ${diskname}${prefix}5";
