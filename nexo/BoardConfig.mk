@@ -72,15 +72,15 @@ BOARD_HOSTAPD_DRIVER             := NL80211
 ifeq ($(BOARD_WLAN_VENDOR),TI)
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wl12xx
 BOARD_WLAN_DEVICE                := wl12xx_mac80211
-WIFI_DRIVER_MODULE_NAME          := "wl12xx"
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl12xx.ko"
+WIFI_DRIVER_MODULE_NAME          := "wl18xx"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wl18xx.ko"
 BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_wl12xx
 BOARD_SOFTAP_DEVICE              := wl12xx_mac80211
 USES_TI_MAC80211                 := true
 BOARD_HAVE_BLUETOOTH_TI          := true
 BOARD_USE_FORCE_BLE              := true
 TARGET_KERNEL_MODULES := \
-    kernel_imx/drivers/net/wireless/ti/wl12xx/wl12xx.ko:system/lib/modules/wl12xx.ko
+    kernel_imx/drivers/net/wireless/ti/wl18xx/wl18xx.ko:system/lib/modules/wl18xx.ko
 endif
 
 ifeq ($(BOARD_WLAN_VENDOR),BCM)
