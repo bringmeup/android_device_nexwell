@@ -56,7 +56,9 @@ PRODUCT_PACKAGES += uim-sysfs \
 
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
-	device/nexwell/wl18xx/wl18xx-fw-4.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-4.bin
+	device/nexwell/wl18xx/wl18xx-fw-4.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-4.bin \
+	device/nexwell/wl18xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
+	device/nexwell/wl18xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts
 endif
 
 ifeq ($(BOARD_WLAN_VENDOR),BCM)
