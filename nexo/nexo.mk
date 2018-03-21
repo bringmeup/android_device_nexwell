@@ -36,6 +36,7 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:system/etc/audio_policy_volumes.xml \
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6d.bin:system/lib/firmware/vpu/vpu_fw_imx6d.bin 	\
 	external/linux-firmware-imx/firmware/vpu/vpu_fw_imx6q.bin:system/lib/firmware/vpu/vpu_fw_imx6q.bin \
+	device/fsl/common/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
 	${HOME}/.android/adbkey.pub:/data/misc/adb/adb_keys
 
 PRODUCT_PROPERTY_OVERRIDES += \
