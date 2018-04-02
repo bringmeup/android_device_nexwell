@@ -22,4 +22,16 @@
 <resources>
     <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
     <bool translatable="false" name="config_wifi_dual_band_support">false</bool>
+    <!-- Flag indicating that this device does not rotate and will always remain in its default
+         orientation. Activities that desire to run in a non-compatible orientation will be run
+         from an emulated display within the physical display. -->
+    <bool name="config_forceDefaultOrientation">false</bool>
+    <!-- If true, enables auto-rotation features using the accelerometer.
+         Otherwise, auto-rotation is disabled.  Applications may still request
+         to use specific orientations but the sensor is ignored and sensor-based
+         orientations are not available.  Furthermore, all auto-rotation related
+         settings are omitted from the system UI.  In certain situations we may
+         still use the accelerometer to determine the orientation, such as when
+         docked if the dock is configured to enable the accelerometer. -->
+    <bool name="config_supportAutoRotation">false</bool>
 </resources>
