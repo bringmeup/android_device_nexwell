@@ -1,0 +1,70 @@
+if itest.s a$uboot_defconfig == a; then
+        echo "Please set uboot_defconfig to the appropriate value"
+        exit
+fi
+
+echo "================================"
+echo "            welcome             "
+echo "          upgrade.scr           "
+echo "================================"
+echo "board = $board"
+echo "disk = $disk"
+echo "dtype = $dtype"
+echo "bootpart = $bootpart"
+echo "uboot_defconfig = $uboot_defconfig"
+echo "--------------------------------"
+
+mmc dev $disk
+
+a_base=0x12000000
+setexpr a_uImage1 ${a_base}
+setexpr a_uImage2 ${a_base} + 0x400000
+
+setenv stdout serial,vga
+
+echo "Check U-Boot" ;
+
+if load ${devtype} ${devnum}:${distro_bootpart} ${a_uImage1} u-boot.$uboot_defconfig ; then
+else
+	echo "File u-boot.$uboot_defconfig not found on SD card" ;
+	exit
+fi
+
+jumpaddr=0x400
+blksize=0x200
+
+setexpr blkoffset ${jumpaddr} / ${blksize}
+setexpr blknumber ${filesize} / ${blksize}
+setexpr blknumber ${blknumber} + 0x1
+
+echo "Read a bit more than $filesize bytes from SD card ($blknumber blocks starting at block $blkoffset)" ;
+
+if mmc read ${a_uImage2} $blkoffset $blknumber ; then
+else
+	echo "Error reading current bootloader from SD card, exiting upgrade script..." ;
+	exit
+fi
+
+if cmp.b ${a_uImage1} ${a_uImage2} $filesize ; then
+	echo "U-Boot versions match, exiting upgrade script..." ;
+	exit
+fi
+
+echo "Need U-Boot upgrade" ;
+echo "Program in 5 seconds" ;
+for n in 5 4 3 2 1 ; do
+	echo $n ;
+	sleep 1 ;
+done
+
+echo "Write a bit more than $filesize bytes to SD card ($blknumber blocks starting at block $blkoffset)" ;
+
+if mmc write ${a_uImage1} $blkoffset $blknumber ; then
+else
+	echo "Error writing boot loader to SD card, exiting upgrade script..." ;
+	exit
+fi
+
+while echo "U-Boot upgraded, resetting board" ; do
+	reset
+done

@@ -11,6 +11,19 @@ else
 fi
 mw.l 0x020cc068 0 1
 
+echo "================================"
+echo "            welcome             "
+echo "          6x_bootscript        "
+echo "================================"
+echo "board = $board"
+echo "disk = $disk"
+echo "dtype = $dtype"
+echo "bootpart = $bootpart"
+echo "uboot_defconfig = $uboot_defconfig"
+echo "--------------------------------"
+
+setenv stdout serial,vga
+
 setenv bootargs ''
 
 m4=''
@@ -77,28 +90,8 @@ if itest.s "x" != "x${cmd_custom}" ; then
 fi
 
 # ------------------- Displays detection
-if itest.s "x" != "x${cmd_hdmi}" ; then
-	run cmd_hdmi
-	cmd_xxx_present=1;
-	if itest.s x == x${allow_noncea} ; then
-		setenv bootargs ${bootargs} mxc_hdmi.only_cea=1;
-		echo "only CEA modes allowed on HDMI port";
-	else
-		setenv bootargs ${bootargs} mxc_hdmi.only_cea=0;
-		echo "non-CEA modes allowed on HDMI, audio may be affected";
-	fi
-fi
-if itest.s "x" != "x${cmd_lcd}" ; then
-	run cmd_lcd
-	cmd_xxx_present=1;
-	setenv bootargs $bootargs tsc2004.calibration=-67247,-764,272499173,324,69283,-8653010,65536
-fi
 if itest.s "x" != "x${cmd_lvds}" ; then
 	run cmd_lvds
-	cmd_xxx_present=1;
-fi
-if itest.s "x" != "x${cmd_lvds2}" ; then
-	run cmd_lvds2
 	cmd_xxx_present=1;
 fi
 if itest.s "x" == "x${cmd_xxx_present}" ; then
@@ -110,13 +103,7 @@ fi
 setenv bootargs "$bootargs console=${console},115200 vmalloc=128M consoleblank=0 rootwait"
 setenv bootargs $bootargs androidboot.hardware=freescale
 
-if itest.s "xsata" == "x$dtype" ; then
-	bootdev=sda
-elif itest.s "xusb" == "x$dtype" ; then
-	bootdev=sda
-else
-	bootdev=mmcblk${disk}
-fi
+bootdev=mmcblk${disk}
 setenv bootargs $bootargs androidboot.bootdev=$bootdev
 
 if itest.s "x" != "x$selinux" ; then
