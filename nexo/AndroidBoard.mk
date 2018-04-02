@@ -12,4 +12,5 @@ TARGET_BOARD_DTS_CONFIG= imx6qp:imx6qp-nexo.dtb
 
 include device/nexwell/bootscript.mk
 include device/nexwell/ramdisk.mk
+include device/nexwell/bootanimation.mk
 
