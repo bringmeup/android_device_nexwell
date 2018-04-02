@@ -187,12 +187,11 @@ else
    echo "-----------missing ${diskname}${prefix}${PART_system}";
 fi
 
-ubootimage=bootable/bootloader/uboot-imx/u-boot.imx
+ubootimage=out/target/product/$product/boot/u-boot.nexo
 if [ -e ${ubootimage} ]; then
-#   echo "FIXME copying u-boot to i 0x400 is not possible, because partitions description is there..."
    sudo dd if=${ubootimage} of=${diskname} bs=512 seek=2 conv=fsync
 else
-   echo "-----------missing ${ubootimage} - you should build it, and then try again (or load uboot manually)"
+   echo "-----------missing ${ubootimage} - rebuild AOSP, and then try again (or dd uboot manually to 0x200 offset)"
 fi
 
 sync && sudo umount ${diskname}${prefix}*

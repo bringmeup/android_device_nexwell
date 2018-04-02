@@ -8,6 +8,8 @@ export BUILD_NUMBER=20160530
 include device/fsl/imx6/BoardConfigCommon.mk
 include device/nexwell/nexo/wifi_config.mk
 
+TARGET_NO_BOOTLOADER := false
+
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
 else
