@@ -135,3 +135,8 @@ PRODUCT_PACKAGES += \
     libVSC \
     libg2d \
     libgpuhelper
+
+# custom apps
+PRODUCT_PACKAGES += \
+    NexoVision
+
