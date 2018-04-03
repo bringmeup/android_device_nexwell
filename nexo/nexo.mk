@@ -41,7 +41,7 @@ PRODUCT_COPY_FILES += \
 	${HOME}/.android/adbkey.pub:/data/misc/adb/adb_keys
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160
+    ro.sf.lcd_density=240
 
 DEVICE_PACKAGE_OVERLAYS := \
 	device/nexwell/nexo/overlay \
