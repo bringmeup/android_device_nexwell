@@ -136,6 +136,9 @@ PRODUCT_PACKAGES += \
     libg2d \
     libgpuhelper
 
+# first in the list, so make it default
+PRODUCT_LOCALES := pl_PL
+
 # custom apps
 PRODUCT_PACKAGES += \
     NexoVision
