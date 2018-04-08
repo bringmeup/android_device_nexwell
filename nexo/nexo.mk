@@ -12,8 +12,6 @@ USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.rc:root/init.freescale.rc \
 	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
-	device/nexwell/nexo/init.i.MX6DL.rc:root/init.freescale.i.MX6DL.rc \
-	device/nexwell/nexo/init.i.MX6Q.rc:root/init.freescale.i.MX6Q.rc \
 	device/nexwell/nexo/init.i.MX6QP.rc:root/init.freescale.i.MX6QP.rc \
 	device/nexwell/nexo/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/nexwell/nexo/ueventd.freescale.rc:root/ueventd.freescale.rc \
