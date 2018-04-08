@@ -16,3 +16,6 @@ on boot
 
     # set front camera.
     setprop front_camera_name ov5642_camera,ov5640_camera
+
+    # set light sensor device
+    setprop ro.hardware.lightsensor /sys/bus/iio/devices/iio:device0

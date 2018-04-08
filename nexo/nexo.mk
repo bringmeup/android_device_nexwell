@@ -67,6 +67,9 @@ ifeq ($(BOARD_WLAN_VENDOR),BCM)
 PRODUCT_PACKAGES += \
 	audio.a2dp.default
 
+PRODUCT_PACKAGES += \
+	sensors.nexo
+
 PRODUCT_COPY_FILES += \
 	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \

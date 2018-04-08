@@ -9,6 +9,7 @@ include device/fsl/imx6/BoardConfigCommon.mk
 include device/nexwell/nexo/wifi_config.mk
 
 TARGET_NO_BOOTLOADER := false
+TARGET_BOOTLOADER_BOARD_NAME := nexo
 
 ifneq ($(DEFCONF),)
 TARGET_KERNEL_DEFCONF := $(DEFCONF)
@@ -43,7 +44,7 @@ BOARD_CAMERA_LIBRARIES := libcamera
 BOARD_NOT_HAVE_MODEM := true
 BOARD_HAVE_IMX_CAMERA := true
 BOARD_HAVE_USB_CAMERA := false
-BOARD_HAS_SENSOR := false
+BOARD_HAS_SENSOR := true
 TARGET_USERIMAGES_SPARSE_EXT_DISABLED := false
 
 USE_ION_ALLOCATOR := false

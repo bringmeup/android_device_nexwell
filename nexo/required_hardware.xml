@@ -34,6 +34,8 @@
     <feature name="android.hardware.touchscreen" />
     <feature name="android.hardware.touchscreen.multitouch" />
     <feature name="android.hardware.touchscreen.multitouch.distinct" />
+    <feature name="android.hardware.sensor.light" />
+    <feature name="android.hardware.sensor.proximity" />
     <feature name="android.hardware.microphone" />
     <feature name="android.hardware.screen.landscape" />
     <feature name="android.hardware.usb.accessory" />
