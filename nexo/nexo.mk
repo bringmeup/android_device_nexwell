@@ -43,7 +43,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 DEVICE_PACKAGE_OVERLAYS := \
 	device/nexwell/nexo/overlay \
-	device/boundary/common/overlay
+	device/nexwell/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
