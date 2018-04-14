@@ -10,8 +10,8 @@ PRODUCT_MANUFACTURER := nexwell
 
 USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.rc:root/init.freescale.rc \
-	device/boundary/common/init.recovery.rc:root/init.recovery.freescale.rc \
+	device/nexwell/common/init.rc:root/init.freescale.rc \
+	device/nexwell/common/init.recovery.rc:root/init.recovery.freescale.rc \
 	device/nexwell/nexo/init.i.MX6QP.rc:root/init.freescale.i.MX6QP.rc \
 	device/nexwell/nexo/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/nexwell/nexo/ueventd.freescale.rc:root/ueventd.freescale.rc \
@@ -24,10 +24,10 @@ PRODUCT_COPY_FILES += \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/tsc2004.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/fusion_F0710A.idc \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/silead_ts.idc \
-	device/boundary/common/gsl1680.fw:system/etc/firmware/silead/gsl1680.fw \
-	device/boundary/common/audio_policy.conf:system/etc/audio_policy.conf \
-	device/boundary/common/audio_effects.conf:vendor/etc/audio_effects.conf \
-	device/boundary/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
+	device/nexwell/common/gsl1680.fw:system/etc/firmware/silead/gsl1680.fw \
+	device/nexwell/common/audio_policy.conf:system/etc/audio_policy.conf \
+	device/nexwell/common/audio_effects.conf:vendor/etc/audio_effects.conf \
+	device/nexwell/common/audio_policy_configuration.xml:system/etc/audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:system/etc/a2dp_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml \
 	frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:system/etc/usb_audio_policy_configuration.xml \
@@ -55,7 +55,7 @@ PRODUCT_PACKAGES += uim-sysfs \
 	TQS_D_1.7.ini
 
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.ti.rc:root/init.bt-wlan.rc \
+	device/nexwell/common/init.ti.rc:root/init.bt-wlan.rc \
 	device/nexwell/wl18xx/wl18xx-fw-4.bin:system/etc/firmware/ti-connectivity/wl18xx-fw-4.bin \
 	device/nexwell/wl18xx/TIInit_7.6.15.bts:system/etc/firmware/ti-connectivity/TIInit_7.6.15.bts \
 	device/nexwell/wl18xx/TIInit_7.2.31.bts:system/etc/firmware/ti-connectivity/TIInit_7.2.31.bts
@@ -69,7 +69,7 @@ PRODUCT_PACKAGES += \
 	sensors.nexo
 
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.bcm.rc:root/init.bt-wlan.rc \
+	device/nexwell/common/init.bcm.rc:root/init.bt-wlan.rc \
 	device/boundary/nitrogen6x/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
 	device/boundary/brcm/bcm43340.hcd:system/etc/firmware/bcm43340.hcd \
 	device/boundary/brcm/brcmfmac43340-sdio.bin:system/etc/firmware/brcm/brcmfmac43340-sdio.bin \
@@ -95,7 +95,7 @@ PRODUCT_PACKAGES += \
 	wlan/qcom_cfg.ini
 
 PRODUCT_COPY_FILES += \
-	device/boundary/common/init.qca.rc:root/init.bt-wlan.rc
+	device/nexwell/common/init.qca.rc:root/init.bt-wlan.rc
 
 # Specify which rfkill node to use since the first available (rfkill0) is the
 # one from the HCI driver in the kernel (net/bluetooth/hci_core.c).

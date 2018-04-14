@@ -1,0 +1,3 @@
+on boot
+    # load module needed by brcmfmac driver
+    insmod /system/lib/modules/brcmutil.ko
