@@ -56,6 +56,6 @@
       <value>130</value>
       <value>40</value>
   </array>
-  <!-- This is the battery capacity in mAh -->
-  <item name="battery.capacity">4800</item>
+  <!-- This is the battery capacity in mAh; 0 means we run without battery -->
+  <item name="battery.capacity">0</item>
 </device>
