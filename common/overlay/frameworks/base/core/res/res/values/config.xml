@@ -170,6 +170,8 @@
 
     <integer name="config_screenBrightnessDim">5</integer>
 
+    <integer name="config_screenBrightnessSettingDefault">150</integer>
+
     <!-- Base "touch slop" value used by ViewConfiguration as a
          movement threshold where scrolling should begin. -->
     <dimen name="config_viewConfigurationTouchSlop">24dp</dimen>
