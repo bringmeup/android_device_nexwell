@@ -1,0 +1,4 @@
+# allow factory reset
+allow uncrypt metadata_block_device:blk_file write;
+allow uncrypt metadata_block_device:blk_file open;
+allow uncrypt metadata_block_device:blk_file read;
