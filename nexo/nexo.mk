@@ -142,5 +142,7 @@ PRODUCT_LOCALES := pl_PL
 
 # custom apps
 PRODUCT_PACKAGES += \
-    NexoVision
+    NexoVision \
+    HelloGradle \
+    Unlocker
 
