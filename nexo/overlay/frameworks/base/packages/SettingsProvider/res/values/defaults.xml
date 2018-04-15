@@ -37,4 +37,10 @@
 
     <!-- Do not give up on DHCP -->
     <integer name="def_max_dhcp_retries">0</integer>
+
+    <!-- light-sensor used by default -->
+    <bool name="def_screen_brightness_automatic_mode">true</bool>
+
+    <!-- default value same as in kernel -->
+    <integer name="def_screen_brightness">150</integer>    
 </resources>
