@@ -43,4 +43,7 @@
 
     <!-- default value same as in kernel -->
     <integer name="def_screen_brightness">150</integer>    
+
+    <!-- default inactivity time, after which screen will be dimmed/turned off [ms] -->
+    <integer name="def_screen_off_timeout">15000</integer>
 </resources>

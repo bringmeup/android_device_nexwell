@@ -42,8 +42,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=240
 
 DEVICE_PACKAGE_OVERLAYS := \
+	device/nexwell/common/overlay \
 	device/nexwell/nexo/overlay \
-	device/nexwell/common/overlay
 
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi

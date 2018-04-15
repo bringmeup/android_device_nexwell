@@ -35,7 +35,7 @@
          docked if the dock is configured to enable the accelerometer. -->
     <bool name="config_supportAutoRotation">false</bool>
     <!-- Fast brightness animation ramp rate -->
-    <integer translatable="false" name="config_brightness_ramp_rate_fast">80</integer>
+    <integer translatable="false" name="config_brightness_ramp_rate_fast">300</integer>
     <!-- Indicate whether the SD card is accessible without removing the battery. -->
     <bool name="config_batterySdCardAccessibility">true</bool>
     <string-array name="config_statusBarIcons">
