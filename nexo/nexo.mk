@@ -48,6 +48,9 @@ DEVICE_PACKAGE_OVERLAYS := \
 PRODUCT_CHARACTERISTICS := tablet
 PRODUCT_AAPT_CONFIG += xlarge large tvdpi hdpi
 
+PRODUCT_PACKAGES += \
+        sensors.nexo
+
 ifeq ($(BOARD_WLAN_VENDOR),TI)
 PRODUCT_PACKAGES += uim-sysfs \
 	bt_sco_app \
@@ -64,9 +67,6 @@ endif
 ifeq ($(BOARD_WLAN_VENDOR),BCM)
 PRODUCT_PACKAGES += \
 	audio.a2dp.default
-
-PRODUCT_PACKAGES += \
-	sensors.nexo
 
 PRODUCT_COPY_FILES += \
 	device/nexwell/common/init.bcm.rc:root/init.bt-wlan.rc \
