@@ -89,14 +89,14 @@ sudo parted -a minimal \
 unit MiB \
 mklabel msdos \
 mkpart primary ext4 20 41 \
-mkpart primary ext4 41 62 \
-mkpart extended 62 100% \
-mkpart logical ext4 1625 100% \
-mkpart logical ext4 63 1087 \
-mkpart logical ext4 1088 1600 \
-mkpart logical ext4 1601 1611 \
-mkpart logical ext4 1612 1622 \
-mkpart logical ext4 1623 1625 \
+mkpart primary ext4 42 63 \
+mkpart extended 64 100% \
+mkpart logical ext4 1628 100% \
+mkpart logical ext4 65 1089 \
+mkpart logical ext4 1090 1602 \
+mkpart logical ext4 1603 1613 \
+mkpart logical ext4 1614 1624 \
+mkpart logical ext4 1625 1627 \
 print
 
 # 1      20,0MiB  40,0MiB  20,0MiB  primary   ext4         lba
