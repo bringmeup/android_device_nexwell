@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $# -lt 1 ]; then
-	echo "Usage: $0 /dev/diskname [product=nexo] [--force]"
+	echo "Usage: $0 /dev/diskname [product=nexo] [--force] [--noformat]"
 	exit -1 ;
 fi
 
@@ -18,11 +18,15 @@ else
 fi
 
 force='';
+noformat='';
 if [ $# -ge 2 ]; then
    product=$2;
    if [ $# -ge 3 ]; then
       if [ "x--force" == "x$3" ]; then
          force=yes;
+      fi
+      if [ "x--noformat" == "x$3" ]; then
+         noformat=yes;
       fi
    fi
 else
@@ -76,38 +80,42 @@ if [[ "$diskname" =~ "mmcblk" ]]; then
 fi
 
 echo "reasonable disk $diskname, partitions ${diskname}${prefix}1..." ;
+
 umount ${diskname}${prefix}*
 
-# overwrite first 20MB with a test pattern
-#sudo badblocks -t 0x44 -b 1024 -c 1 -w ${diskname} 20480
+if [[ "$noformat" -ne "yes" ]]; then
 
-# destroy the partition table
-# dd if=/dev/zero of=${diskname} count=1 bs=1024
+	# overwrite first 20MB with a test pattern
+	#sudo badblocks -t 0x44 -b 1024 -c 1 -w ${diskname} 20480
 
-sudo parted -a minimal \
--s ${diskname} \
-unit MiB \
-mklabel msdos \
-mkpart primary ext4 20 41 \
-mkpart primary ext4 42 63 \
-mkpart extended 64 100% \
-mkpart logical ext4 1628 100% \
-mkpart logical ext4 65 1089 \
-mkpart logical ext4 1090 1602 \
-mkpart logical ext4 1603 1613 \
-mkpart logical ext4 1614 1624 \
-mkpart logical ext4 1625 1627 \
-print
+	# destroy the partition table
+	# dd if=/dev/zero of=${diskname} count=1 bs=1024
 
-# 1      20,0MiB  40,0MiB  20,0MiB  primary   ext4         lba
-# 2      41,0MiB  61,0MiB  20,0MiB  primary   ext4         lba
-# 3      62,0MiB  3724MiB  3662MiB  extended               lba
-# 6      63,0MiB  1087MiB  1024MiB  logical   ext4         lba
-# 7      1088MiB  1600MiB  512MiB   logical   ext4         lba
-# 8      1601MiB  1611MiB  10,0MiB  logical   ext4         lba
-# 9      1612MiB  1622MiB  10,0MiB  logical   ext4         lba
-#10      1623MiB  1625MiB  2,00MiB  logical   ext4         lba
-# 5      1625MiB  3724MiB  2099MiB  logical   ext4         lba
+	sudo parted -a minimal \
+	-s ${diskname} \
+	unit MiB \
+	mklabel msdos \
+	mkpart primary ext4 20 41 \
+	mkpart primary ext4 42 63 \
+	mkpart extended 64 100% \
+	mkpart logical ext4 1628 100% \
+	mkpart logical ext4 65 1089 \
+	mkpart logical ext4 1090 1602 \
+	mkpart logical ext4 1603 1613 \
+	mkpart logical ext4 1614 1624 \
+	mkpart logical ext4 1625 1627 \
+	print
+	
+	# 1      20,0MiB  40,0MiB  20,0MiB  primary   ext4         lba
+	# 2      41,0MiB  61,0MiB  20,0MiB  primary   ext4         lba
+	# 3      62,0MiB  3724MiB  3662MiB  extended               lba
+	# 6      63,0MiB  1087MiB  1024MiB  logical   ext4         lba
+	# 7      1088MiB  1600MiB  512MiB   logical   ext4         lba
+	# 8      1601MiB  1611MiB  10,0MiB  logical   ext4         lba
+	# 9      1612MiB  1622MiB  10,0MiB  logical   ext4         lba
+	#10      1623MiB  1625MiB  2,00MiB  logical   ext4         lba
+	# 5      1625MiB  3724MiB  2099MiB  logical   ext4         lba	
+fi
 
 PART_boot=1
 PART_recovery=2
@@ -128,41 +136,42 @@ for n in ${PART_boot} ${PART_recovery} ${PART_data} ${PART_system} ${PART_cache}
    fi
    sync
 done
-
 echo "all partitions present and accounted for!";
 
-echo "------------------making boot partition"
-mkfs.ext4 -F -L boot ${diskname}${prefix}${PART_boot}
-sync && sleep 1
-echo "------------------making recovery partition"
-mkfs.ext4 -F -L recovery ${diskname}${prefix}${PART_recovery}
-sync && sleep 1
-echo "------------------making data partition"
-mkfs.ext4 -F -L data ${diskname}${prefix}${PART_data}
-sync && sleep 1
-echo "------------------making system partition"
-mkfs.ext4 -F -L system ${diskname}${prefix}${PART_system}
-sync && sleep 1
-echo "------------------making cache partition"
-mkfs.ext4 -F -L cache ${diskname}${prefix}${PART_cache}
-sync && sleep 1
-echo "------------------making vendor partition"
-mkfs.ext4 -F -L vendor ${diskname}${prefix}${PART_vendor}
-sync && sleep 1
-echo "------------------making misc partition"
-mkfs.ext4 -F -L misc ${diskname}${prefix}${PART_misc}
-sync && sleep 1
-echo "------------------making crypt partition"
-mkfs.ext4 -F -L crypt ${diskname}${prefix}${PART_crypt}
-sync && sleep 1
-
+if [[ "$noformat" -ne "yes" ]]; then
+	MAKE_EXT4FS="mkfs.ext4 -O ^metadata_csum"
+	
+	echo "------------------making boot partition"
+	mkfs.ext4 -F -L boot ${diskname}${prefix}${PART_boot}
+	sync && sleep 1
+	echo "------------------making recovery partition"
+	${MAKE_EXT4FS} -F -L recovery ${diskname}${prefix}${PART_recovery}
+	sync && sleep 1
+	echo "------------------making data partition"
+	${MAKE_EXT4FS} -F -L data ${diskname}${prefix}${PART_data}
+	sync && sleep 1
+	echo "------------------making system partition"
+	${MAKE_EXT4FS} -F -L system ${diskname}${prefix}${PART_system}
+	sync && sleep 1
+	echo "------------------making cache partition"
+	${MAKE_EXT4FS} -F -L cache ${diskname}${prefix}${PART_cache}
+	sync && sleep 1
+	echo "------------------making vendor partition"
+	${MAKE_EXT4FS} -F -L vendor ${diskname}${prefix}${PART_vendor}
+	sync && sleep 1
+	echo "------------------making misc partition"
+	${MAKE_EXT4FS} -F -L misc ${diskname}${prefix}${PART_misc}
+	sync && sleep 1
+	echo "------------------making crypt partition"
+	${MAKE_EXT4FS} -F -L crypt ${diskname}${prefix}${PART_crypt}
+	sync && sleep 1
+fi
 
 echo "------------------mounting boot, recovery, data, vendor partitions"
 sync && sudo partprobe && sleep 5
-
 for n in ${PART_boot} ${PART_recovery} ${PART_data} ${PART_vendor} ; do
-   echo "--- mounting ${diskname}${prefix}${n}";
-   ${mount} ${diskname}${prefix}${n}
+        echo "--- mounting ${diskname}${prefix}${n}";
+        ${mount} ${diskname}${prefix}${n}
 done
 
 
@@ -173,6 +182,7 @@ sudo cp -rfv out/target/product/$product/data/* ${mountpoint}/data/
 sudo cp -rfv out/target/product/$product/vendor/* ${mountpoint}/vendor/
 
 if [ -e ${diskname}${prefix}5 ]; then
+   echo "-----------dd/simg2img system.img"
    # Check whether system image is sparse or not
    system_img=out/target/product/$product/system.img
    file $system_img | grep sparse > /dev/null
@@ -189,6 +199,7 @@ fi
 
 ubootimage=out/target/product/$product/boot/u-boot.nexo
 if [ -e ${ubootimage} ]; then
+   echo "-----------dd u-boot image ${ubootimage}"
    sudo dd if=${ubootimage} of=${diskname} bs=512 seek=2 conv=fsync
 else
    echo "-----------missing ${ubootimage} - rebuild AOSP, and then try again (or dd uboot manually to 0x200 offset)"
