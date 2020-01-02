@@ -264,16 +264,12 @@ if [[ -z $_noimages ]]; then
     # Check whether image is sparse or not
     file $img | grep sparse >/dev/null
     if [ $? -eq 0 ]; then
-      ./out/host/linux-x86/bin/simg2img ${img} ${img}.unpacked
-      sudo dd if=${img}.unpacked of=${device} bs=1M status=progress
+      ./out/host/linux-x86/bin/simg2img ${img} ${device}
     else
       sudo dd if=${img} of=${device} bs=1M status=progress
     fi
 
     sudo sync && sleep 1
-
-    echo ">>> Verify '${label}' filesystem on '${device}'"
-    sudo e2fsck -f ${device}
   done
 fi
 
@@ -282,7 +278,13 @@ sudo dd if=${_ubootimage} of=${diskname} bs=512 seek=2 conv=fsync status=none
 
 sudo sync && sleep 1
 
-echo ">>> sync & unmount"
-sync && sudo umount ${diskname}${prefix}* &>/dev/null
+echo ">>> Unmount all"
+sudo umount ${diskname}${prefix}* &>/dev/null
+
+echo ">>> Check filesystems last time..."
+for partid in "${!PART_names[@]}"; do
+  device=${diskname}${prefix}${partid}
+  sudo e2fsck -f ${device}
+done
 
 echo ">>> All done!"
