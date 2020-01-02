@@ -145,21 +145,25 @@ if [[ -z $_noformat ]]; then
 
   sudo parted -a minimal \
     -s ${diskname} \
+    rm 1 \
+    rm 2 \
+    rm 3 \
+    rm 5 \
+    rm 6 \
+    rm 7 \
+    rm 10 \
+    rm 8 \
+    rm 9 \
+    print
+
+  sudo parted -a minimal \
+    -s ${diskname} \
     unit MiB \
-    rm ${diskname}${prefix}1
-    rm ${diskname}${prefix}2
-    rm ${diskname}${prefix}3
-    rm ${diskname}${prefix}5
-    rm ${diskname}${prefix}6
-    rm ${diskname}${prefix}7
-    rm ${diskname}${prefix}8
-    rm ${diskname}${prefix}9
-    rm ${diskname}${prefix}10
     mklabel msdos \
     mkpart primary ext4 20 41 \
     mkpart primary ext4 42 63 \
     mkpart extended 64 100% \
-    mkpart logical ext4 1636 100% \
+    mkpart logical ext4 1636 14784 \
     mkpart logical ext4 65 1089 \
     mkpart logical ext4 1090 1602 \
     mkpart logical ext4 1603 1613 \
@@ -251,7 +255,6 @@ sudo sync && sleep 1
 if [[ -z $_noimages ]]; then
   # TODO consider doing this for other paritions as well
   for partid in ${PART_system}; do
-  #for partid in ${PART_system} ${PART_boot} ${PART_cache} ${PART_recovery} ${PART_data} ${PART_vendor}; do
     label=${PART_names[$partid]}
     device=${diskname}${prefix}${partid}
     img=${_out}/${PART_images[$partid]}
@@ -264,8 +267,8 @@ if [[ -z $_noimages ]]; then
     # Check whether image is sparse or not
     file $img | grep sparse >/dev/null
     if [ $? -eq 0 ]; then
-      ./out/host/linux-x86/bin/simg2img ${img} ${img}.uncompressed
-      sudo dd if=${img}.uncompressed | pv -s `du -b "${img}.uncompressed" | col1` | dd of=${device} bs=4k
+      sudo ./out/host/linux-x86/bin/simg2img ${img} ${device}
+      #sudo dd if=${img}.uncompressed | pv -s `du -b "${img}.uncompressed" | col1` | sudo dd of=${device} bs=4k
     else
       sudo dd if=${img} of=${device} bs=4k status=progress
     fi
@@ -275,9 +278,7 @@ if [[ -z $_noimages ]]; then
 fi
 
 if [[ -z $_nocopy ]]; then
-  #for partid in ${PART_boot}; do
-  #for partid in ${PART_data} ${PART_boot}; do
-  for partid in ${PART_boot} ${PART_recovery} ${PART_data} ${PART_vendor}; git do
+  for partid in ${PART_boot} ${PART_recovery} ${PART_data} ${PART_vendor}; do
     label=${PART_names[$partid]}
     device=${diskname}${prefix}${partid}
     device_mnt=${mountpoint}/${label}
