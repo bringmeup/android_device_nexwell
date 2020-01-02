@@ -153,16 +153,16 @@ if [[ -z $_noformat ]]; then
     mkpart logical ext4 1625 1635 \
     print
 
-  #Number  Start    End       Size      Type      File system  Flags
-  # 1      20,0MiB  41,0MiB   21,0MiB   primary   ext4         lba
-  # 2      42,0MiB  63,0MiB   21,0MiB   primary   ext4         lba
-  # 3      64,0MiB  14784MiB  14720MiB  extended               lba
-  # 6      65,0MiB  1089MiB   1024MiB   logical   ext4         lba
-  # 7      1090MiB  1602MiB   512MiB    logical   ext4         lba
-  # 8      1603MiB  1613MiB   10,0MiB   logical   ext4         lba
-  # 9      1614MiB  1624MiB   10,0MiB   logical   ext4         lba
-  #10      1625MiB  1627MiB   2,00MiB   logical   ext4         lba
-  # 5      1628MiB  14784MiB  13156MiB  logical   ext4         lba
+#  Number  Start    End       Size      Type      File system  Flags
+#   1      20,0MiB  41,0MiB   21,0MiB   primary   ext4         lba
+#   2      42,0MiB  63,0MiB   21,0MiB   primary   ext4         lba
+#   3      64,0MiB  14784MiB  14720MiB  extended               lba
+#   6      65,0MiB  1089MiB   1024MiB   logical   ext4         lba
+#   7      1090MiB  1602MiB   512MiB    logical   ext4         lba
+#   8      1603MiB  1613MiB   10,0MiB   logical   ext4         lba
+#   9      1614MiB  1624MiB   10,0MiB   logical   ext4         lba
+#  10      1625MiB  1635MiB   10,0MiB   logical   ext4         lba
+#   5      1636MiB  14784MiB  13148MiB  logical   ext4         lba
 
 fi
 
