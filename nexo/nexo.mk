@@ -16,6 +16,7 @@ PRODUCT_COPY_FILES += \
 	device/nexwell/nexo/required_hardware.xml:system/etc/permissions/required_hardware.xml \
 	device/nexwell/nexo/ueventd.freescale.rc:root/ueventd.freescale.rc \
 	device/nexwell/nexo/fstab.freescale:root/fstab.freescale \
+	device/nexwell/nexo/audio_override_defaults_0.json:vendor/etc/audio_override_defaults_0.json \
 	device/nexwell/bootanimation.zip:system/media/bootanimation.zip \
 	device/boundary/scripts/setwlanmac:system/bin/setwlanmac \
 	device/fsl/common/input/eGalax_Touch_Screen.idc:system/usr/idc/eGalax_Touch_Screen.idc \
